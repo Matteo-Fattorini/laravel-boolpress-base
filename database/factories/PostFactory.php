@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(PostModel::class, function (Faker $faker) {
     return [
-        "title" => $faker->word(),
+        "title" => "Titolo:". " ". implode(" ",$faker->words(2)),
         "author"=> $faker->name(),
         "category_id" => $faker->numberBetween(1,5),
     ];
