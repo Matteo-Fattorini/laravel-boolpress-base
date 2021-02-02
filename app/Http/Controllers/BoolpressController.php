@@ -49,7 +49,11 @@ class BoolpressController extends Controller
      */
     public function show($id)
     {
-        //
+        $post= PostModel::find($id);
+        $postId = $post["id"];
+        $detail = PostInformationModel::where("post_id", $postId)->get();
+
+        return view("details", compact("detail"));
     }
 
     /**

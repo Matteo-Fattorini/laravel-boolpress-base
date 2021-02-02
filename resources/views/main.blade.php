@@ -14,7 +14,7 @@
     <h5 class="card-title mb-2 text-center">{{ $post->title }}</h5>
     <h6 class="card-title mb-2">{{ $post->author }}</h6>
     
-    <a href="#" class="btn btn-primary">Dettagli Post</a>
+    <a href="{{ route("boolpress.show",$post->id) }}" class="btn btn-primary">Dettagli Post</a>
   </div>
 </div>
 @endforeach
