@@ -17,6 +17,7 @@ class BoolpressController extends Controller
     public function index()
     {
         $data = PostModel::all();
+        
         return view("main",compact("data"));
     }
 
@@ -50,10 +51,10 @@ class BoolpressController extends Controller
     public function show($id)
     {
         $post= PostModel::find($id);
-        $postId = $post["id"];
-        $detail = PostInformationModel::where("post_id", $postId)->get();
-
-        return view("details", compact("detail"));
+        $detail = $post->getInformation;
+        $category = $post->getCategory; 
+              
+        return view("details", compact("detail","post","category"));
     }
 
     /**

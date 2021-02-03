@@ -10,8 +10,9 @@
    
     <div class="card" style="width: 18rem;">
     <div class="card-body">
-    <h5 class="card-title">Slug: {{ $detail[0]["slug"] }}</h5>
-    <p class="card-text">{{ $detail[0]["description"]}}</p>
+    <h5 class="card-title">Slug: {{ $detail["slug"] }}</h5>
+    <h5 class="card-title">Id_cat: {{ $category["id"] }}</h5>
+    <p class="card-text">{{ $detail["description"]}}</p>
   
   </div>
 </div>

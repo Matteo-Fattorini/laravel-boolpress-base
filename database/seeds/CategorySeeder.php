@@ -12,9 +12,8 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(CategoryModel::class,5)->create()->each(function($id){
-            $id->save();
-        });
+        factory(CategoryModel::class,5)->create();
+        
         
     }
 }
