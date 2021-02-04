@@ -17,3 +17,6 @@ Route::get('/', "BoolpressController@index");
 
 
 Route::resource("boolpress", "BoolpressController");
+
+
+Route::resource("tag", "TagController");

@@ -18,6 +18,7 @@
                     <li><a class="" href="{{ route("boolpress.index") }}">Home</a>
                     </li>
                     <li> <a class="" href="{{ route("boolpress.create") }}">Crea Post</a> </li>
+                    <li> <a class="" href="{{ route("tag.index") }}">Tags</a> </li>
                 </ul>
             </div>
         </div></div>
@@ -27,7 +28,7 @@
     @section("main")
     <div class="row">
         <div class="col-8 offset-2 mt-5 ">
-            
+            @yield("content")
         </div>
     </div>
     @show

@@ -17,7 +17,7 @@
     <h4>Tag List</h4>
     @foreach ($tags as $tag)
 
-        <h5 class="card-title"> - {{ $tag["name"] }}</h5>
+        <h5 class="card-title"> - <a href="{{ route("tag.show", $tag->id) }}">{{ $tag["name"] }}</a></h5>
     @endforeach
   
   </div>
