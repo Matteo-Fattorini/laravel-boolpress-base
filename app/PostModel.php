@@ -16,6 +16,13 @@ class PostModel extends Model
         return $this->belongsTo("App\CategoryModel","category_id");
     }
 
+    public function getTags(){
+        return $this->belongsToMany("App\TagModel", "post_tag", "post_id", "tag_id");
+    }
+    
+
+   
+
 
 
 

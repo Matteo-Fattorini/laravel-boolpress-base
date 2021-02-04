@@ -17,7 +17,7 @@
                 <ul class="d-flex h-100 justify-content-evenly align-items-center">
                     <li><a class="" href="{{ route("boolpress.index") }}">Home</a>
                     </li>
-                    <li> <a class="" href="#">TODO</a> </li>
+                    <li> <a class="" href="{{ route("boolpress.create") }}">Crea Post</a> </li>
                 </ul>
             </div>
         </div>

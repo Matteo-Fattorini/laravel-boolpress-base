@@ -52,11 +52,10 @@ class BoolpressController extends Controller
     {
         $post= PostModel::find($id);
         $detail = $post->getInformation;
-        $category = $post->getCategory; 
-              
+        $category = $post->getCategory;
         return view("details", compact("detail","post","category"));
     }
-
+                                                                      
     /**
      * Show the form for editing the specified resource.
      *
@@ -65,7 +64,7 @@ class BoolpressController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -88,6 +87,15 @@ class BoolpressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = PostModel::find($id);
+        $post->getInformation->delete();
+        
+        foreach ($post->getTags as $tag){
+            
+            $post->getTags()->detach($tag->id);
+        }
+        $post->delete();
+
+        return redirect()->back();
     }
 }

@@ -11,4 +11,7 @@ class PostInformationModel extends Model
     public function getPost(){
         return $this->belongsTo("App\PostModel");
     }
+
+
+    
 }
