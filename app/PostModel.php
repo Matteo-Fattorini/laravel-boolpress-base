@@ -8,6 +8,8 @@ class PostModel extends Model
 {
     protected $table = "posts";
 
+    protected $fillable = ["title","author", "category_id"];
+
     public function getInformation(){
         return $this->hasOne("App\PostInformationModel","post_id", "id");
     }

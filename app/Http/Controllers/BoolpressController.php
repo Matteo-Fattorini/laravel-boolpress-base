@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CategoryModel;
 use App\PostModel;
+use App\TagModel;
 use App\PostInformationModel;
+use phpDocumentor\Reflection\DocBlock\Tag;
 
 class BoolpressController extends Controller
 {
@@ -17,8 +19,8 @@ class BoolpressController extends Controller
     public function index()
     {
         $data = PostModel::all();
-        
-        return view("main",compact("data"));
+
+        return view("main", compact("data"));
     }
 
     /**
@@ -28,7 +30,9 @@ class BoolpressController extends Controller
      */
     public function create()
     {
-        //
+        $tags = TagModel::all();
+        $categories = CategoryModel::all();
+        return view("create", compact("tags", "categories"));
     }
 
     /**
@@ -39,7 +43,31 @@ class BoolpressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd(($request->all()));
+        $data = $request->all();
+        $newPost = PostModel::create([
+            "title" => $data["title"],
+            "author" => $data["author"],
+            "category_id" => $data["categories"]
+        ]);
+
+
+        $newPost->save();
+
+        $postInfo = PostInformationModel::create([
+            "post_id" => $newPost->id,
+            "description" => $data["description"],
+            "slug" => "prova_slug"
+        ]);
+
+        $postInfo->save();
+
+        foreach ($data["tags"] as $tag){
+            $newPost->getTags()->attach($tag);
+        }
+
+
+        return redirect()->route('boolpress.index');
     }
 
     /**
@@ -50,12 +78,13 @@ class BoolpressController extends Controller
      */
     public function show($id)
     {
-        $post= PostModel::find($id);
+        $post = PostModel::find($id);
+        $tags = $post->getTags;
         $detail = $post->getInformation;
         $category = $post->getCategory;
-        return view("details", compact("detail","post","category"));
+        return view("details", compact("detail", "post", "category", "tags"));
     }
-                                                                      
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -64,7 +93,6 @@ class BoolpressController extends Controller
      */
     public function edit($id)
     {
-        
     }
 
     /**
@@ -89,12 +117,13 @@ class BoolpressController extends Controller
     {
         $post = PostModel::find($id);
         $post->getInformation->delete();
-        
-        foreach ($post->getTags as $tag){
-            
+
+        foreach ($post->getTags as $tag) {
+
             $post->getTags()->detach($tag->id);
         }
         $post->delete();
+
 
         return redirect()->back();
     }

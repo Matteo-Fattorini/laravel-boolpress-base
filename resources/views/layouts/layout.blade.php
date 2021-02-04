@@ -20,8 +20,8 @@
                     <li> <a class="" href="{{ route("boolpress.create") }}">Crea Post</a> </li>
                 </ul>
             </div>
-        </div>
-    </div>
+        </div></div>
+    
     @show
 
     @section("main")

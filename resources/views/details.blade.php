@@ -13,6 +13,12 @@
     <h5 class="card-title">Slug: {{ $detail["slug"] }}</h5>
     <h5 class="card-title">Id_cat: {{ $category["id"] }}</h5>
     <p class="card-text">{{ $detail["description"]}}</p>
+
+    <h4>Tag List</h4>
+    @foreach ($tags as $tag)
+
+        <h5 class="card-title"> - {{ $tag["name"] }}</h5>
+    @endforeach
   
   </div>
 </div>

@@ -12,6 +12,6 @@ class PostInformationSeeder extends Seeder
      */
     public function run()
     {
-        factory(PostInformationModel::class,500)->create();
+        factory(PostInformationModel::class,50)->create();
     }
 }
