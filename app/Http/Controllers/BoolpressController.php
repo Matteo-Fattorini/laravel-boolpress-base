@@ -43,11 +43,17 @@ class BoolpressController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(($request->all()));
+
         $data = $request->all();
+
+        $validated = $request->validate([
+            'title' => 'required|string|min:3',
+            'author' => 'required|string|min:3',
+        ]);
+
         $newPost = PostModel::create([
-            "title" => $data["title"],
-            "author" => $data["author"],
+            "title" => $validated["title"],
+            "author" => $validated["author"],
             "category_id" => $data["categories"]
         ]);
 
@@ -62,7 +68,7 @@ class BoolpressController extends Controller
 
         $postInfo->save();
 
-        foreach ($data["tags"] as $tag){
+        foreach ($data["tags"] as $tag) {
             $newPost->getTags()->attach($tag);
         }
 
@@ -93,6 +99,11 @@ class BoolpressController extends Controller
      */
     public function edit($id)
     {
+        $post = PostModel::find($id);
+        $tags = TagModel::all();
+        $categories = CategoryModel::all();
+
+        return view("edit", compact("post", "tags", "categories"));
     }
 
     /**
@@ -104,7 +115,17 @@ class BoolpressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = PostModel::find($id);
+        $data = $request->all();
+        $post->getTags()->detach();
+        $post->update($data);
+
+        $post->getInformation->update($data);
+        foreach ($data["tags"] as $tag) {
+            $post->getTags()->attach($tag);
+        }
+
+        return redirect()->route('boolpress.index');
     }
 
     /**

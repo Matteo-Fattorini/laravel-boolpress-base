@@ -9,20 +9,20 @@
         <div class="row">
             <div class="col-6 offset-3">
 
-                <form method="post" action="{{ route('boolpress.store') }}" class="mt-5">
+                <form method="post" action="{{ route('boolpress.update',$post->id) }}" class="mt-5">
                     @csrf
-                    @method("POST")
+                    @method("PUT")
                     <div class="mb-3">
                         <label for="title" class="form-label">Titolo</label>
-                        <input type="text" value ="{{ old("title") }}"name="title" class="form-control" id="title" aria-describedby="emailHelp">
+                        <input type="text" value ="{{ $post["title"] }}"name="title" class="form-control" id="title" aria-describedby="emailHelp">
                         @error("title")
                         {{ $message }}
                         @enderror
 
 
                         <div class="mb-3">
-                            <label for="author" value ="{{ old("author") }} class="form-label">Autore</label>
-                            <input type="text" name="author" class="form-control" id="author">
+                            <label for="author" value ="{{ old("author") }}"class="form-label">Autore</label>
+                            <input type="text" name="author" value="{{ $post->author}}" class="form-control" id="author">
                         </div>
                         @error("author")
                         {{ $message }}
@@ -36,7 +36,7 @@
 
 
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categories"
+                                    <input class="form-check-input" type="radio" <?php echo ($category["id"] == $post["category_id"]) ? 'checked' : ''; ?> name="category_id"
                                         value="{{ $category['id'] }}" id="categories1">
 
                                     <label class="form-check-label" for="categories1">
@@ -47,13 +47,15 @@
 
                             <h4 class="mt-2">Inserisci la descrizione</h4>
                             <div class="mb-3">
-                                <textarea name="description" class="form-control"></textarea>
+                                <textarea name="description" class="form-control">{{ $post->getInformation->description }}</textarea>
                                 <fieldset>
                                 <h4 class="mt-4">Seleziona i tag</h4>
                                 @foreach ($tags as $tag)
                                     
                                 <div class="form-check ">
-                                    <input class="form-check-input" name="tags[]" type="checkbox" value="{{ $tag["id"] }}" id="tags">
+                                    <input 
+                                    
+                                    class="form-check-input" name="tags[]" type="checkbox" value="{{ $tag["id"] }}" id="tags">
                                     <label class="form-check-label" for="tags">
                                        {{ $tag['name'] }}
                                     </label>

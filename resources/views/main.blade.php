@@ -15,6 +15,7 @@
     <h6 class="card-title mb-2">{{ $post->author }}</h6>
     
     <a href="{{ route("boolpress.show",$post->id) }}" class="btn btn-primary mb-3 mt-2">Dettagli Post</a>
+    <a href="{{ route("boolpress.edit",$post->id) }}" class="btn btn-primary mb-3 mt-2">Modifica Post</a>
     <form action="{{ route("boolpress.destroy",$post->id) }}" method="post">
       @CSRF
       @method("delete")
