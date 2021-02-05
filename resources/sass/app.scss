@@ -1,1 +1,14 @@
 //
+@import "./variables";
+
+
+*{
+    margin: 0;
+}
+
+
+
+h1{
+    color: $blue;
+    @include Prova;
+}

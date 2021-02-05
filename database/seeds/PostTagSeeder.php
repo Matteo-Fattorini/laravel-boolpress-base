@@ -22,7 +22,7 @@ class PostTagSeeder extends Seeder
         
         foreach ($posts as $post){
             for($i = 1; $i <= $faker->numberBetween(1,$tags->count()); $i++){
-
+                
                 DB::table("post_tag")->insert([
                     "post_id" => $post->id,
                     "tag_id" => $i

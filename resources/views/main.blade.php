@@ -25,5 +25,8 @@
 </div>
 @endforeach
 </div>
+<div class="col-2 offset-5">
+  {{ $data->links() }}
+</div>
 </div>
 @endsection

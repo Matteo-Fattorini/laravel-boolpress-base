@@ -18,7 +18,9 @@ class BoolpressController extends Controller
      */
     public function index()
     {
-        $data = PostModel::all();
+        $data = PostModel::paginate(
+            10
+        );
 
         return view("main", compact("data"));
     }
@@ -68,9 +70,8 @@ class BoolpressController extends Controller
 
         $postInfo->save();
 
-        foreach ($data["tags"] as $tag) {
-            $newPost->getTags()->attach($tag);
-        }
+        $newPost->getTags()->attach($data["tags"]);
+
 
 
         return redirect()->route('boolpress.index');
@@ -121,9 +122,9 @@ class BoolpressController extends Controller
         $post->update($data);
 
         $post->getInformation->update($data);
-        foreach ($data["tags"] as $tag) {
-            $post->getTags()->attach($tag);
-        }
+
+        $post->getTags()->attach($data["tags"]);
+
 
         return redirect()->route('boolpress.index');
     }
