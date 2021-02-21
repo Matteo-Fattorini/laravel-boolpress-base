@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::resource("boolpress", "BoolpressController");
 
 
 Route::resource("tag", "TagController");
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

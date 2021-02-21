@@ -23,7 +23,7 @@ class PostModel extends Model
     }
     
 
-   
+
 
 
 

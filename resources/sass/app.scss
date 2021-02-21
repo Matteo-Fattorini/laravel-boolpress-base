@@ -1,14 +1,8 @@
-//
-@import "./variables";
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
+// Variables
+@import 'variables';
 
-*{
-    margin: 0;
-}
-
-
-
-h1{
-    color: $blue;
-    @include Prova;
-}
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';

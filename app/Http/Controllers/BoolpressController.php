@@ -47,7 +47,7 @@ class BoolpressController extends Controller
     {
 
         $data = $request->all();
-
+        
         $validated = $request->validate([
             'title' => 'required|string|min:3',
             'author' => 'required|string|min:3',
@@ -56,19 +56,23 @@ class BoolpressController extends Controller
         $newPost = PostModel::create([
             "title" => $validated["title"],
             "author" => $validated["author"],
-            "category_id" => $data["categories"]
+            "category_id" => 1
         ]);
 
 
-        $newPost->save();
+        $newPost->getCategory()->associate($data["categories"]);
 
-        $postInfo = PostInformationModel::create([
+
+       
+
+        PostInformationModel::create([
             "post_id" => $newPost->id,
             "description" => $data["description"],
             "slug" => "prova_slug"
         ]);
 
-        $postInfo->save();
+        
+        
 
         $newPost->getTags()->attach($data["tags"]);
 
@@ -116,6 +120,7 @@ class BoolpressController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $post = PostModel::find($id);
         $data = $request->all();
         $post->getTags()->detach();
